@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../shared/api.service";
 
 @Component({
   selector: 'my-about',
@@ -7,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() {
+  constructor( private api: ApiService,) {
     // Do stuff
   }
 
   ngOnInit() {
+    console.log(this.api.getReports());
     console.log('Hello About');
   }
 
