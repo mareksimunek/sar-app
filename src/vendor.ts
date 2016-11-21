@@ -5,15 +5,10 @@ import '@angular/core';
 import '@angular/common';
 import '@angular/http';
 import '@angular/router';
-import '@ng-bootstrap/ng-bootstrap';
 
 import 'rxjs';
 import '@angularclass/hmr';
 import 'bootstrap/dist/css/bootstrap.css';
-import  'angular-in-memory-web-api';
-
-
-
 
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...

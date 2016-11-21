@@ -10,9 +10,13 @@ import '../style/app.scss';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
+  loggedIn = false;
 
   constructor(private api: ApiService) {
-    // Do something with api
+
+  }
+
+  ngOnInit() {
+    this.loggedIn = this.api.isLogged();
   }
 }

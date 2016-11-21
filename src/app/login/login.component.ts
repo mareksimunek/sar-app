@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
     private alertService: AlertService) { }
 
   ngOnInit() {
-    // reset login status
-    //this.authenticationService.logout();
+    console.log('login1');
+    this.authenticationService.logout();
   }
 
   login() {
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.router.navigate(['/']);
+
         },
         error => {
           this.alertService.error(error);

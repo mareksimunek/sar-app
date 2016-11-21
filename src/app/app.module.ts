@@ -9,16 +9,16 @@ import { AboutComponent } from './about/about.component';
 import { ReportComponent} from './report/report-add.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
-import {MockData} from "./shared/data-mock";
 import {Error404Component} from "./error/error404/error404.component";
 import {LoginComponent} from "./login/login.component";
-import {AuthGuard} from "./_guards/auth.guard";
+import {AuthGuard} from "./guards/auth.guard";
 import {UserService} from "./shared/user.service";
 import {AuthenticationService} from "./shared/authentication.service";
 import {AlertService} from "./shared/alert.service";
+import {Report} from "./shared/report.model";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -28,7 +28,7 @@ import {AlertService} from "./shared/alert.service";
     FormsModule,
     JsonpModule,
     routing,
-    // NgbModule.forRoot(),
+    NgbModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -43,7 +43,8 @@ import {AlertService} from "./shared/alert.service";
     AuthGuard,
     UserService,
     AuthenticationService,
-    AlertService
+    AlertService,
+    Report
   ],
   bootstrap: [AppComponent]
 })

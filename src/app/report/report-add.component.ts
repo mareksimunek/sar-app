@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Report} from "../shared/report.model";
+
 
 @Component({
   selector: 'report',
@@ -6,12 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent implements OnInit {
 
+  report : Report= new Report();
+
   constructor() {
-    // Do stuff
   }
 
   ngOnInit() {
-    console.log('Hello report');
+
+    console.log(this.report);
   }
+
+  save(): void {
+    console.log(this.report);
+  }
+
+  get diagnostic() { return JSON.stringify(this.report ); }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../shared/api.service";
+import {Report} from "../shared/report.model";
 
 @Component({
   selector: 'my-about',
@@ -8,13 +9,17 @@ import {ApiService} from "../shared/api.service";
 })
 export class AboutComponent implements OnInit {
 
+  private report ;
+  public arrayOfKeys;
   constructor( private api: ApiService,) {
-    // Do stuff
+
   }
 
   ngOnInit() {
-    console.log(this.api.getReports());
-    console.log('Hello About');
+    this.report = this.api.getReport(1);
+    this.arrayOfKeys = Object.keys(this.report);
+    console.log();
+    console.log('Hello About11');
   }
 
 }
