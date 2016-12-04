@@ -5,7 +5,7 @@ var http_1 = require('@angular/http');
 var forms_1 = require('@angular/forms');
 var app_component_1 = require('./app.component');
 var home_component_1 = require('./home/home.component');
-var about_component_1 = require('./about/about.component');
+var about_component_1 = require('./report/report-detail.component.ts');
 var shared_1 = require('./shared');
 var app_routing_1 = require('./app.routing');
 var hmr_1 = require('@angularclass/hmr');
@@ -39,13 +39,13 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 home_component_1.HomeComponent,
-                about_component_1.AboutComponent
+                about_component_1.ReportDetailComponent
             ],
             providers: [
                 shared_1.ApiService
             ],
             bootstrap: [app_component_1.AppComponent]
-        }), 
+        }),
         __metadata('design:paramtypes', [core_1.ApplicationRef])
     ], AppModule);
     return AppModule;

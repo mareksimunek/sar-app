@@ -1,4 +1,4 @@
-<header>
+<header ng-controller="MainCtrl as main">
 
   <nav class="container navbar navbar-light bg-faded">
     <a class="navbar-brand" href="#">Centrum Hlášení</a>
@@ -7,11 +7,11 @@
         <a [routerLink]="['']">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a [routerLink]="['about']">Detail hlášení</a>
+        <a [routerLink]="['/report/1']">Detail hlášení</a>
 
       </li>
       <li class="nav-item">
-        <a [routerLink]="['report']">Vlozit hlášení</a>
+        <a [routerLink]="['add-report']">Vlozit hlášení</a>
 
       </li>
 
@@ -22,8 +22,12 @@
     </ul>
 
   </nav>
+  <!--<pre>$location.path() = {{main.$location.path()}}</pre>-->
+  <!--<pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>-->
+  <!--<pre>$route.current.params = {{main.$route.current.params}}</pre>-->
+  <!--<pre>$routeParams = {{main.$routeParams}}</pre>-->
 </header>
-<main class="container">
+<main ng-view class="container">
 
   <!-- Images (and assets) are parsed and loaded from within the public directory -->
 
