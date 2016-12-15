@@ -1,0 +1,27 @@
+<!--<pre>{{reports | json}}</pre>-->
+<loading-container [loading]="loading">
+  <div class="row" *ngIf="reports">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Název</th>
+        <th>Rok</th>
+        <th>Obtížnost</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of reports">
+        <th scope="row"><a routerLink="/report/{{item.id}}">{{item.reportNumber}}</a></th>
+        <td class="align-baseline">{{item.name}}</td>
+        <td>{{item.reportYear}}</td>
+        <td>{{item.difficulty ? item.difficulty : '-'}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+
+
+  </div>
+</loading-container>
+

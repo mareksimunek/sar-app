@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {AuthenticationService} from "../shared/authentication.service";
 import {AlertService} from "../shared/alert.service";
+import {BulkService} from "../shared/bulk.service";
+import {AuthHttp} from "../shared/auth-http.service";
 
 
 @Component({
@@ -15,8 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private alertService: AlertService) { }
+    private authenticationService: AuthHttp,
+    private alertService: AlertService,
+    private bulkService : BulkService) { }
 
   ngOnInit() {
     console.log('login1');
@@ -28,10 +31,12 @@ export class LoginComponent implements OnInit {
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
         data => {
+          //this.bulkService.createBulk(data);
           this.router.navigate(['/']);
 
         },
         error => {
+          console.log('haha');
           this.alertService.error(error);
           this.loading = false;
         });

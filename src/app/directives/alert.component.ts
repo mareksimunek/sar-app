@@ -3,7 +3,6 @@ import {AlertService} from "../shared/alert.service";
 
 
 @Component({
-    moduleId: module.id,
     selector: 'alert',
     templateUrl: 'alert.component.html'
 })

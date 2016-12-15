@@ -1,25 +1,42 @@
 import {Component, OnInit} from '@angular/core';
 import {Report} from "../shared/report.model";
-import {ApiService} from "../shared/api.service";
 import {AlertService} from "../shared/alert.service";
+import {CompleterData, CompleterService} from "ng2-completer/index";
+import {BulkService} from "../shared/bulk.service";
+import {UserService} from "../shared/user.service";
+import {FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
+import {ReportService} from "../shared/report.service";
 
 
 @Component({
   selector: 'report',
   templateUrl: './report-add.component.html',
+  styleUrls: ['./report-add.component.css'],
 })
 export class ReportComponent implements OnInit {
 
   report:Report = new Report();
   loading = false;
   reportTypes = ['Dotaz', 'Požadavek', 'Vada', 'Námět'];
+  private searchStr: string;
+  private systemsData: CompleterData;
+  private companyData: CompleterData;
+  private personData : CompleterData;
 
-
-  constructor(private api:ApiService,
-              private alertService: AlertService
+  constructor(private api:ReportService,
+              private alertService: AlertService,
+              private completerService: CompleterService,
+              private bulkService : BulkService,
+              private userService : UserService,
+              private router: Router,
   ) {
     //fill with mock data #todo delete after development
     for (var prop in this.report) this.report[prop] = this.reportMock[prop];
+    console.log(this.bulkService.systemList);
+    this.companyData = completerService.local(this.bulkService.companyList, 'name', 'name');
+    this.systemsData = completerService.local(this.bulkService.systemList, 'systemCode', 'systemCode').descriptionField("note");
+    this.personData = this.userService.getUsersAutocomplete();
 
   }
 
@@ -29,14 +46,16 @@ export class ReportComponent implements OnInit {
 
   }
 
-  onSubmit() {
+  onSubmit(form: FormGroup) {
     console.log(this.report);
     this.loading = true;
     this.api.addReport(this.report)
       .subscribe(
         data => {
-          this.alertService.success('Pridano');
+          this.router.navigate(['/']);
+          this.alertService.success('Hlašení úspěšně přidáno');
           this.loading = false;
+
         },
         error => {
           this.alertService.error(error);
@@ -44,39 +63,35 @@ export class ReportComponent implements OnInit {
         });
   }
 
-  get diagnostic() {
-    return this.report;
-  }
-
   setReportType(type){
     this.report.reportType = type;
   }
+  setAutocomplateId(event, key){
+    this.report[key] = event.originalObject.id;
+  }
+
+  isNumber(value){
+    return !isNaN(parseFloat(value)) && isFinite(value);
+  }
+
 
 
   reportMock = {
-    'reportNumber': 10,
-    'reportYear': 2016,
+
     'reportType': 'POZADAVEK',
-    'dateOfCreation': 1477868400000,
     'companyId': 2,
-    'customerId': 3,
+    'customerId': null,
+    'creatorUserCode': 2,
     'dueDate': 1477868400000,
     'difficulty': 10,
     'reportText': 'Blabla',
-    'solutionText': null,
-    'solvingUserCode': 'SPI',
-    'solvedUserCode': null,
-    'solutionDate': null,
-    'creatorUserCode': 'SPI',
-    'lastChangeDate': 1477868400000,
-    'lastChangeUserCode': null,
-    'lastUpdateDate': null,
-    'garantUserCode': "SPI",
-    'garantSolvedUserCode': null,
-    'solutionDateGarant': null,
+    'solvingUserCode': '1',
+    'garantUserCode': "1",
     'priority': 1,
-    'name': 'Úpravy objednávek a smluv pro ISRS',
+    'name': 'Úpravy objednfaa',
     'systemId': 2
   };
+
+
 
 }

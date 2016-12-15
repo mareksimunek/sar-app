@@ -1,77 +1,80 @@
 <!--<pre>{{report | json}}</pre>-->
-<div class="row" *ngIf="report">
-  <div class="col-sm-9">
-    <div class="row">
-      <h5>Text hlášení</h5>
+<loading-container [loading]="loading">
+  <div class="row" *ngIf="report">
+    <div class="col-sm-9">
+      <div class="row">
+        <h5>Text hlášení</h5>
         <p class="text-sm-left">{{report.reportText}}</p>
-      <dl class="row">
-        <dt class="col-sm-6">Kod řešitele</dt>
-        <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
-      </dl>
+        <dl class="row">
+          <dt class="col-sm-6">Kod řešitele</dt>
+          <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
+        </dl>
+      </div>
+      <div class="row">
+        <h5>Řešení</h5>
+        <p class="text-sm-left">fewfwefwef f wef w fwe few fwe fwfew{{report.solutionText}}</p>
+        <dl class="row">
+          <dt class="col-sm-6">Kod řešitele</dt>
+          <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
+          <dt class="col-sm-6">Kod garanta</dt>
+          <dd class="col-sm-6">{{report.garantUserCode}}</dd>
+          <dt class="col-sm-6">Kod uzivatele resi</dt>
+          <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
+          <dt class="col-sm-6">Kod uzivatele vyresil</dt>
+          <dd class="col-sm-6">{{report.solvedUserCode}}</dd>
+          <dt class="col-sm-6">Datum vyreseni</dt>
+          <dd class="col-sm-6">{{report.solutionDate | date:'medium'}}</dd>
+        </dl>
+
+      </div>
+      <communication  [reportId]="report.id" ></communication>
     </div>
-    <div class="row">
-      <h5>Řešení</h5>
-      <p class="text-sm-left">fewfwefwef f wef w fwe few fwe  fwfew{{report.solutionText}}</p>
-      <dl class="row">
-        <dt class="col-sm-6">Kod řešitele</dt>
-        <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
-        <dt class="col-sm-6">Kod garanta</dt>
-        <dd class="col-sm-6">{{report.garantUserCode}}</dd>
-        <dt class="col-sm-6">Kod uzivatele resi</dt>
-        <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
-        <dt class="col-sm-6">Kod uzivatele vyresil</dt>
-        <dd class="col-sm-6">{{report.solvedUserCode}}</dd>
-        <dt class="col-sm-6">Datum vyreseni</dt>
-        <dd class="col-sm-6">{{report.solutionDate | date:'medium'}}</dd>
-      </dl>
-
+    <div class="col-sm-3">
+      <table class="table table-striped">
+        <tbody>
+        <tr>
+          <th scope="row">Rok</th>
+          <td>{{report.reportYear}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Typ</th>
+          <td>{{report.reportType}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Systém</th>
+          <td>{{names.systemName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Datum vzniku</th>
+          <td>{{report.dateOfCreation | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Název společnosti</th>
+          <td>{{names.companyName}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Zákazník</th>
+          <td>{{report.customerId}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Termin</th>
+          <td>{{report.dueDate | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Obtížnost</th>
+          <td>{{report.difficulty}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Datum poslední změny</th>
+          <td>{{report.lastChangeDate | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Pracnost</th>
+          <td>{{report.difficulty}}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-
-  </div>
-  <div class="col-sm-3">
-    <table class="table table-striped">
-      <tbody>
-      <tr>
-        <th scope="row">Rok</th>
-        <td>{{report.reportYear}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Typ</th>
-        <td>{{report.reportType}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Datum vzniku</th>
-        <td>{{report.dateOfCreation | date:'medium'}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Název společnosti</th>
-        <td>{{report.companyId}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Zákazník</th>
-        <td>{{report.customerId}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Termin</th>
-        <td>{{report.dueDate  | date:'medium'}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Obtížnost</th>
-        <td>{{report.difficulty}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Datum poslední změny</th>
-        <td>{{report.lastChangeDate  | date:'medium'}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Pracnost</th>
-        <td>{{report.difficulty}}</td>
-      </tr>
-      </tbody>
-    </table>
   </div>
 
-
-
-
-</div>
+</loading-container>

@@ -1,36 +1,48 @@
-<form (ngSubmit)="onSubmit()" #reportForm="ngForm">
+<form (ngSubmit)="onSubmit(reportForm)" #reportForm="ngForm">
 
 
   <div class="form-group row">
-    <label for="input3" class="col-sm-2 col-form-label">Firma</label>
+    <label for="company" class="col-sm-2 col-form-label">Firma</label>
     <div class="col-sm-10">
-      <input name="companyId" [(ngModel)]="report.companyId"
-             type="text" class="form-control" id="input3"
-             placeholder="Firma" required>
+      <ng2-completer name="fa" (selected)="setAutocomplateId($event, 'companyId')"
+                     [dataService]="companyData" [minSearchLength]="0" id="company"
+                     placeholder="Firma" required>
+      </ng2-completer>
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Osoba</label>
+    <label for="customerId" class="col-sm-2 col-form-label">Osoba</label>
     <div class="col-sm-10">
-      <input name="customerId" type="text" [(ngModel)]="report.customerId" class="form-control" id="inputPassword3"
-             placeholder="Osoba" required>
+      <ng2-completer placeholder="Osoba" name="customerId"
+                     (selected)="setAutocomplateId($event, 'customerId')"
+                     [dataService]="personData" [minSearchLength]="3" id="customerId" required>
+      </ng2-completer>
+      <!--<div *ngIf=" someNumber.valid " class="col-md-6 alert alert-danger">-->
+        <!--Položka požadována-->
+      <!--</div>-->
     </div>
   </div>
   <div class="form-group row">
     <label for="input4" class="col-sm-2 col-form-label">Systém</label>
     <div class="col-sm-10">
-      <input name="systemId" type="text" [(ngModel)]="report.systemId" class="form-control" id="input4"
-             placeholder="Systém" required>
+      <ng2-completer placeholder="Systém" name="systemId"
+                     (selected)="setAutocomplateId($event, 'systemId')"
+                     [dataService]="systemsData" [minSearchLength]="0" id="input4" required>
+      </ng2-completer>
     </div>
+
   </div>
   <div class="form-group row">
-    <div class="col-xs-6">
+    <label for="reportType" class="col-sm-2 col-form-label">Druh hlášení</label>
+    <div class="col-sm-2">
       <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
+        <button id="reportType" type="button" class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
           {{report.reportType ?report.reportType : 'Druh hlášení'}}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <button *ngFor="let type of reportTypes" class="dropdown-item" (click)="setReportType(type)">{{type}}</button>
+          <button type="button" class="dropdown-item"
+                  *ngFor="let type of reportTypes" (click)="setReportType(type);">{{type}}
+          </button>
         </div>
       </div>
     </div>
@@ -43,18 +55,20 @@
              placeholder="Název hlášení">
     </div>
   </div>
-  <div class="form-group">
-    <label for="exampleTextarea">Text hlášení</label>
+  <div class="form-group row">
+    <label for="textarea" class="col-sm-2 col-form-label">Text hlášení</label>
+    <div class="col-sm-10">
     <textarea name="reportText" [(ngModel)]="report.reportText"
-              class="form-control" id="exampleTextarea" rows="3" required>
+              class="form-control" id="textarea" rows="4" required>
 
     </textarea>
+    </div>
   </div>
   <div class="form-group row">
     <label for="garant" class="col-sm-2 col-form-label">Garant hlášení</label>
     <div class="col-sm-10">
       <input name="garant" [(ngModel)]="report.garantUserCode"
-        type="text" class="form-control" id="garant" placeholder="Garant hlášení" required>
+             type="text" class="form-control" id="garant" placeholder="Garant hlášení" required>
     </div>
   </div>
   <div class="form-group row">
@@ -72,4 +86,4 @@
     </div>
   </div>
 </form>
-<pre>{{diagnostic | json}}</pre>
+<pre>{{report | json}}</pre>

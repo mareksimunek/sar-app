@@ -2,7 +2,6 @@ import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpModule, JsonpModule} from '@angular/http';
 import { FormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ReportDetailComponent } from './report/report-detail.component';
@@ -15,11 +14,17 @@ import {Error404Component} from './error/error404/error404.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuard} from './guards/auth.guard';
 import {UserService} from './shared/user.service';
-import {AuthenticationService} from './shared/authentication.service';
 import {AlertService} from './shared/alert.service';
 import {Report} from './shared/report.model';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import {BulkService} from "./shared/bulk.service";
+import { Ng2CompleterModule } from "ng2-completer";
+import {ReportListComponent} from "./report/report-list.component";
+import {LoadingContainer} from "./directives/loader.component";
+import {AlertComponent} from "./directives/alert.component";
+import {AuthHttp} from "./shared/auth-http.service";
+import {ReportService} from "./shared/report.service";
+import {CommunicationComponent} from "./communication/communication.component";
 
 
 @NgModule({
@@ -29,6 +34,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     JsonpModule,
     routing,
+    Ng2CompleterModule,
     NgbModule.forRoot(),
   ],
   declarations: [
@@ -37,15 +43,21 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ReportDetailComponent,
     ReportComponent,
     Error404Component,
-    LoginComponent
+    LoginComponent,
+    ReportListComponent,
+    LoadingContainer,
+    AlertComponent,
+    CommunicationComponent
   ],
   providers: [
     ApiService,
+    AuthHttp,
+    ReportService,
     AuthGuard,
     UserService,
-    AuthenticationService,
     AlertService,
-    Report
+    Report,
+    BulkService
   ],
   bootstrap: [AppComponent]
 })
