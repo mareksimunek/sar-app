@@ -2,31 +2,47 @@
 <loading-container [loading]="loading">
   <div class="row" *ngIf="report">
     <div class="col-sm-9">
-      <div class="row">
-        <h5>Text hlášení</h5>
-        <p class="text-sm-left">{{report.reportText}}</p>
-        <dl class="row">
-          <dt class="col-sm-6">Kod řešitele</dt>
-          <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
-        </dl>
-      </div>
-      <div class="row">
-        <h5>Řešení</h5>
-        <p class="text-sm-left">fewfwefwef f wef w fwe few fwe fwfew{{report.solutionText}}</p>
-        <dl class="row">
-          <dt class="col-sm-6">Kod řešitele</dt>
-          <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
-          <dt class="col-sm-6">Kod garanta</dt>
-          <dd class="col-sm-6">{{report.garantUserCode}}</dd>
-          <dt class="col-sm-6">Kod uzivatele resi</dt>
-          <dd class="col-sm-6">{{report.solvingUserCode}}</dd>
-          <dt class="col-sm-6">Kod uzivatele vyresil</dt>
-          <dd class="col-sm-6">{{report.solvedUserCode}}</dd>
-          <dt class="col-sm-6">Datum vyreseni</dt>
-          <dd class="col-sm-6">{{report.solutionDate | date:'medium'}}</dd>
-        </dl>
+      <div class="blog-post">
+        <h2 class="blog-post-title">{{report.name}}</h2>
+        <p class="blog-post-meta">{{report.dateOfCreation | date:'medium'}} od <a href="#">{{report.customerId}}</a></p>
 
+        <p>{{report.reportText}}</p>
       </div>
+      <div class="blog-post" *ngIf="report.solutionText">
+        <h2 class="blog-post-title">Řešení</h2>
+        <p class="blog-post-meta">{{report.solutionDate | date:'medium'}} od <a href="#">{{report.solvedUserCode}}</a></p>
+
+        <p>{{report.solutionText}}</p>
+      </div>
+      <div class="alert alert-info" role="alert" *ngIf="!report.solutionText">
+        Na řešení usilovně pracuje náš pracovník {{report.solvingUserCode}}
+      </div>
+
+      <!--<div class="row">-->
+        <!--<h5>Text hlášení</h5>-->
+        <!--<p class="text-sm-left">{{report.reportText}}</p>-->
+        <!--<dl class="row">-->
+          <!--<dt class="col-sm-6">Kod řešitele</dt>-->
+          <!--<dd class="col-sm-6">{{report.solvingUserCode}}</dd>-->
+        <!--</dl>-->
+      <!--</div>-->
+      <!--<div class="row">-->
+        <!--<h5>Řešení</h5>-->
+        <!--<p class="text-sm-left">fewfwefwef f wef w fwe few fwe fwfew{{report.solutionText}}</p>-->
+        <!--<dl class="row">-->
+          <!--<dt class="col-sm-6">Kod řešitele</dt>-->
+          <!--<dd class="col-sm-6">{{report.solvingUserCode}}</dd>-->
+          <!--<dt class="col-sm-6">Kod garanta</dt>-->
+          <!--<dd class="col-sm-6">{{report.garantUserCode}}</dd>-->
+          <!--<dt class="col-sm-6">Kod uzivatele resi</dt>-->
+          <!--<dd class="col-sm-6">{{report.solvingUserCode}}</dd>-->
+          <!--<dt class="col-sm-6">Kod uzivatele vyresil</dt>-->
+          <!--<dd class="col-sm-6">{{report.solvedUserCode}}</dd>-->
+          <!--<dt class="col-sm-6">Datum vyreseni</dt>-->
+          <!--<dd class="col-sm-6">{{report.solutionDate | date:'medium'}}</dd>-->
+        <!--</dl>-->
+
+      <!--</div>-->
       <communication  [reportId]="report.id" ></communication>
     </div>
     <div class="col-sm-3">
@@ -44,10 +60,10 @@
           <th scope="row">Systém</th>
           <td>{{names.systemName}}</td>
         </tr>
-        <tr>
-          <th scope="row">Datum vzniku</th>
-          <td>{{report.dateOfCreation | date:'medium'}}</td>
-        </tr>
+        <!--<tr>-->
+          <!--<th scope="row">Datum vzniku</th>-->
+          <!--<td>{{report.dateOfCreation | date:'medium'}}</td>-->
+        <!--</tr>-->
         <tr>
           <th scope="row">Název společnosti</th>
           <td>{{names.companyName}}</td>

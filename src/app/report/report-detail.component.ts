@@ -10,7 +10,8 @@ import {BulkService} from "../shared/bulk.service";
 @Component({
   selector: '',
   directives: [LoadingContainer, CommunicationComponent],
-  templateUrl: './report-detail.component.html'
+  templateUrl: './report-detail.component.html',
+  styleUrls: ['./report-detail.component.css'],
 })
 export class ReportDetailComponent extends LoadingPage implements OnInit {
 

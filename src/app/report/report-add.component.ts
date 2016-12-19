@@ -52,7 +52,7 @@ export class ReportComponent implements OnInit {
     this.api.addReport(this.report)
       .subscribe(
         data => {
-          this.router.navigate(['/']);
+          this.router.navigate([`/report/${data.id}`]);
           this.alertService.success('Hlašení úspěšně přidáno');
           this.loading = false;
 
@@ -84,11 +84,11 @@ export class ReportComponent implements OnInit {
     'creatorUserCode': 2,
     'dueDate': 1477868400000,
     'difficulty': 10,
-    'reportText': 'Blabla',
+    'reportText': 'Chyba se objevuje obcas a neni prijemne sledovat rozhozenou diakritiku. Dalsi veta je jenom vypln',
     'solvingUserCode': '1',
     'garantUserCode': "1",
     'priority': 1,
-    'name': 'Úpravy objednfaa',
+    'name': 'Úpravy objednavky nefunguje tak jak ma',
     'systemId': 2
   };
 
