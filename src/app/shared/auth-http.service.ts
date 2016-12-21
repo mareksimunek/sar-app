@@ -15,7 +15,8 @@ export class AuthHttp{
   get(url:string):Observable<Response> {
     console.log(RequestMethod.Get);
     let headers = this.getAuthHeader();
-    return this.http.get(this.BASE_URL + url, new RequestOptions({headers: headers}));
+    return this.http.get(this.BASE_URL + url, new RequestOptions({headers: headers}))
+      .catch((err) => this.handleUnauthReq(err));
   }
 
   post(url:string, body:any) {
@@ -39,7 +40,7 @@ export class AuthHttp{
 
     let request = new Request(options);
 
-    return this.http.request(request);
+    return this.http.request(request).catch((err) => this.handleUnauthReq(err));
   }
 
   public getAuthHeader() {
@@ -52,6 +53,15 @@ export class AuthHttp{
       });
       return headers;
     }
+  }
+
+  public handleUnauthReq(error : Response){
+      if (error.status === 401 || error.status === 403) {
+        console.log('The authentication session expires or the user is not authorised. Force refresh of the current page.');
+        this.logout();
+      }
+      return Observable.throw(error);
+
   }
 
 
@@ -77,5 +87,9 @@ export class AuthHttp{
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+  }
+
+  public getBaseUrl(){
+    return this.BASE_URL;
   }
 }

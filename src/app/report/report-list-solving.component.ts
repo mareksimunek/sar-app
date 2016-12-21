@@ -8,10 +8,10 @@ import {ReportService} from "../shared/report.service";
   directives: [LoadingContainer],
   templateUrl: './report-list.component.html',
 })
-export class ReportListComponent extends LoadingPage implements OnInit {
+export class SolverUnresReportsComponent extends LoadingPage implements OnInit {
 
-  private reports;
-  private solverReports;
+
+  private unresolvedReport;
 
   constructor( private api: ReportService) {
     super(true);
@@ -19,17 +19,11 @@ export class ReportListComponent extends LoadingPage implements OnInit {
   }
 
   ngOnInit() {
-     this.api.getReports()
-      .subscribe(report => {
-        this.reports = report;
-        this.loading = false;
-      });
 
-    this.api.getSolverReports().subscribe(reports => {
-      this.solverReports = reports;
+    this.api.getSolverUnresolvedReports().subscribe(reports => {
+      this.unresolvedReport = reports;
     });
 
-    console.log('detail report');
   }
 
 }

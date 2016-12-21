@@ -8,6 +8,7 @@ export class BulkService {
   private _companyList;
   private _systemList;
   private _userId;
+  private _userList;
 
   get companyList(){
     if(this._companyList == null){
@@ -69,6 +70,24 @@ export class BulkService {
     let bulk = JSON.parse(localStorage.getItem('currentUser'));
     return bulk[key];
   }
+
+  get userList(){
+    return this._userList;
+  }
+
+  set userList(value){
+    this._userList=value;
+  }
+
+  getUserName(id){
+    console.log(this.userList);
+    if(this.userList == null || this.userList[id] == null){
+      return null;
+    }
+    let user = this.userList[id];
+    return user;
+  }
+
 
 
 

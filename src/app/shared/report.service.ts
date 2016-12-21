@@ -12,28 +12,43 @@ export class ReportService extends ApiService{
 
 
   private reportUrl = 'report';
-  private addReportUrl = 'addreport';
-  private userReportsUrl = 'userreports';
+  private reportsUrl = 'reports';
+  private userUrl = 'user';
   private communicationUrl = 'communication';
+  private solverReportsUrl = 'solver-reports';
+  private solverUnresolvedReportsUrl = 'solver-unresolved-reports';
+  private solutionUrl = 'solution';
 
   constructor(public http: AuthHttp, private bulkService : BulkService ) {
     super();
   }
 
   getReport(id:number):Observable<Report> {
-    return this.http.get(`${this.reportUrl}?id=${id}`)
+    return this.http.get(`${this.reportUrl}/${id}`)
       .map(this.extractData)
       .catch(this.handleError);
   }
-  getReports():Observable<Report []> {
+  getReports(type = this.reportsUrl):Observable<Report []> {
     let userId = this.bulkService.userId;
-    return this.http.get(`${this.userReportsUrl}?id=${userId}`)
+    return this.http.get(`${this.userUrl}/${userId}/${type}`)
       .map(this.extractData)
       .catch(this.handleError);
+  }
+  getSolverReports():Observable<Report []> {
+    return this.getReports(this.solverReportsUrl);
+  }
+  getSolverUnresolvedReports():Observable<Report []> {
+    return this.getReports(this.solverUnresolvedReportsUrl);
   }
 
+
   addReport(report:Report) {
-    return this.http.put( this.addReportUrl, JSON.stringify(report)
+    return this.http.put( this.reportUrl, JSON.stringify(report)
+    ).map((response:Response) => response.json());
+  }
+
+  editReport(report:Report){
+    return this.http.post( this.reportUrl, JSON.stringify(report)
     ).map((response:Response) => response.json());
   }
 
@@ -45,6 +60,12 @@ export class ReportService extends ApiService{
   getReportCommunications(id : number){
     return this.http.get(`${this.reportUrl}/${id}/${this.communicationUrl}s`)
       .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  addReportSolution(reportSolution, id) {
+    return this.http.put( `${this.reportUrl}/${id}/${this.solutionUrl}`, JSON.stringify(reportSolution)
+    ).map(this.extractData)
       .catch(this.handleError);
   }
 }

@@ -19,8 +19,6 @@ export class CommunicationComponent implements OnInit {
   constructor( private api : ReportService,
                private alertService : AlertService
   ) {
-
-
   }
 
   ngOnInit() {

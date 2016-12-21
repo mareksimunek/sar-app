@@ -1,0 +1,134 @@
+<form (ngSubmit)="onSubmit(reportForm)" #reportForm="ngForm">
+
+  <div class="form-group row">
+    <label for="company" class="col-sm-2 col-form-label">Firma</label>
+    <div class="col-sm-4">
+      <ng2-completer name="fa"  [(ngModel)]="validAutocomplete['companyId']"
+                     (selected)="setAutocomplateId($event, 'companyId')"
+                     [dataService]="companyData" [minSearchLength]="0" id="company"
+                     placeholder="Firma" required>
+      </ng2-completer>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="customerId" class="col-sm-2 col-form-label">Osoba</label>
+    <div class="col-sm-4">
+      <ng2-completer placeholder="Osoba" name="customerId" [(ngModel)]="validAutocomplete['customerId']"
+                     (selected)="setAutocomplateId($event, 'customerId')"
+                     [dataService]="usersData1" [minSearchLength]="3" id="customerId" required>
+      </ng2-completer>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="input4" class="col-sm-2 col-form-label">Systém</label>
+    <div class="col-sm-4">
+      <ng2-completer placeholder="Systém" name="systemId" [(ngModel)]="validAutocomplete['systemId']"
+                     (selected)="setAutocomplateId($event, 'systemId')"
+                     [dataService]="systemsData" [minSearchLength]="0" id="input4" required>
+      </ng2-completer>
+    </div>
+
+  </div>
+  <div class="form-group row">
+    <label for="reportType" class="col-sm-2 col-form-label">Druh hlášení</label>
+    <div class="col-sm-2">
+      <div ngbDropdown class="d-inline-block">
+        <button id="reportType" type="button" class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>
+          {{report.reportType ?report.reportType : 'Druh hlášení'}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <button type="button" class="dropdown-item"
+                  *ngFor="let type of reportTypes" (click)="setReportType(type);">{{type}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Název hlašení</label>
+    <div class="col-sm-10">
+      <input name="name" [(ngModel)]="report.name"
+             type="text" class="form-control" id="name"
+             placeholder="Název hlášení">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="textarea" class="col-sm-2 col-form-label">Text hlášení</label>
+    <div class="col-sm-10">
+    <textarea name="reportText" [(ngModel)]="report.reportText"
+              class="form-control" id="textarea" rows="4" required>
+
+    </textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="garantUserCode" class="col-sm-2 col-form-label">Garant hlášení</label>
+    <div class="col-sm-4">
+      <ng2-completer placeholder="Garant hlášení" name="garantUserCode" [(ngModel)]="validAutocomplete['garantUserCode']"
+                     (selected)="setAutocomplateId($event, 'garantUserCode')"
+                     [dataService]="usersData2" [minSearchLength]="3" id="garantUserCode" required>
+      </ng2-completer>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="solvingUserCode" class="col-sm-2 col-form-label">Řešitel</label>
+    <div class="col-sm-4">
+      <ng2-completer placeholder="Řešitel" name="solvingUserCode" [(ngModel)]="validAutocomplete['solvingUserCode']"
+                     (selected)="setAutocomplateId($event, 'solvingUserCode')"
+                     [dataService]="usersData3" [minSearchLength]="3" id="solvingUserCode" required>
+      </ng2-completer>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="priority" class="col-sm-2 col-form-label">Priorita</label>
+    <div class="col-sm-4">
+      <input name="priority" [(ngModel)]="report.priority" max="9" min="0"
+             type="number" class="form-control" id="priority"
+             placeholder="Priorita" required>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="dueDate" class="col-sm-2 col-form-label">Termín</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="date" name="dueDate" id="dueDate"
+             [value]="report.dueDate | date:'yyyy-MM-dd'" (input)="report.dueDate=$event.target.value">
+    </div>
+  </div>
+
+  <div *ngIf="isEditing">
+    <div class="form-group row">
+      <label for="solutionText" class="col-sm-2 col-form-label">Text řešení</label>
+      <div class="col-sm-10">
+        <textarea name="solutionText" [(ngModel)]="report.solutionText"
+                  class="form-control" id="solutionText" rows="4" required>
+        </textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="difficulty" class="col-sm-2 col-form-label">Pracnost</label>
+      <div class="col-sm-4">
+        <input name="difficulty" [(ngModel)]="report.difficulty"
+               type="number" class="form-control" id="difficulty"
+               placeholder="Pracnost" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="solutionDate" class="col-sm-2 col-form-label">Datum vyřešení</label>
+      <div class="col-sm-4">
+        <input class="form-control" type="date" name="solutionDate" id="solutionDate"
+               [value]="report.solutionDate | date:'yyyy-MM-dd'" (input)="report.solutionDate=$event.target.value">
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button [disabled]="loading" type="submit" class="btn btn-primary">{{labels['send-button']}}</button>
+    </div>
+  </div>
+</form>
+<pre>{{report | json}}</pre>

@@ -5,10 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ReportDetailComponent } from './report/report-detail.component';
-import { ReportComponent} from './report/report-add.component';
 import { ApiService } from './shared';
 import { routing } from './app.routing';
-
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import {Error404Component} from './error/error404/error404.component';
 import {LoginComponent} from './login/login.component';
@@ -25,6 +23,10 @@ import {AlertComponent} from "./directives/alert.component";
 import {AuthHttp} from "./shared/auth-http.service";
 import {ReportService} from "./shared/report.service";
 import {CommunicationComponent} from "./communication/communication.component";
+import {ReportFormComponent} from "./report-form/report-form.component";
+import {ReportAddComponent} from "./report-form/report-add.component";
+import {ReportEditComponent} from "./report-form/report-edit.component";
+
 
 
 @NgModule({
@@ -41,13 +43,15 @@ import {CommunicationComponent} from "./communication/communication.component";
     AppComponent,
     HomeComponent,
     ReportDetailComponent,
-    ReportComponent,
+    ReportAddComponent,
     Error404Component,
     LoginComponent,
     ReportListComponent,
     LoadingContainer,
     AlertComponent,
-    CommunicationComponent
+    CommunicationComponent,
+    ReportFormComponent,
+    ReportEditComponent
   ],
   providers: [
     ApiService,
