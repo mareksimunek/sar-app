@@ -26,6 +26,9 @@ import {CommunicationComponent} from "./communication/communication.component";
 import {ReportFormComponent} from "./report-form/report-form.component";
 import {ReportAddComponent} from "./report-form/report-add.component";
 import {ReportEditComponent} from "./report-form/report-edit.component";
+import {ReportsComponent} from "./report/reports.component";
+import {ReportsUnresolvedComponent} from "./report/reports-unresolved.component";
+import {ReportsResolvedComponent} from "./report/reports-resolved.component";
 
 
 
@@ -51,7 +54,10 @@ import {ReportEditComponent} from "./report-form/report-edit.component";
     AlertComponent,
     CommunicationComponent,
     ReportFormComponent,
-    ReportEditComponent
+    ReportEditComponent,
+    ReportsComponent,
+    ReportsUnresolvedComponent,
+    ReportsResolvedComponent
   ],
   providers: [
     ApiService,

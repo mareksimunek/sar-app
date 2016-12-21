@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {LoadingContainer, LoadingPage} from "../directives/loader.component";
 import {ReportService} from "../shared/report.service";
 
@@ -10,8 +10,9 @@ import {ReportService} from "../shared/report.service";
 })
 export class ReportListComponent extends LoadingPage implements OnInit {
 
+  @Input() reportsType :String;
+  @Input() reportsHeader : String;
   private reports;
-  private solverReports;
 
   constructor( private api: ReportService) {
     super(true);
@@ -19,17 +20,12 @@ export class ReportListComponent extends LoadingPage implements OnInit {
   }
 
   ngOnInit() {
-     this.api.getReports()
+    console.log(this.reportsType);
+     this.api.getReports(this.reportsType)
       .subscribe(report => {
         this.reports = report;
         this.loading = false;
       });
-
-    this.api.getSolverReports().subscribe(reports => {
-      this.solverReports = reports;
-    });
-
-    console.log('detail report');
   }
 
 }
